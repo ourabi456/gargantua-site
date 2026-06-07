@@ -3,11 +3,12 @@
 import { useEffect, useState } from "react";
 
 const LINKS = [
+  ["Download", "/#download"],
   ["About", "/#about"],
   ["Story", "/#story"],
   ["Characters", "/characters"],
   ["Modes", "/#mechanics"],
-  ["Play", "/#play"],
+  ["Demo", "/#play"],
   ["Gameplay", "/#video"],
   ["Team", "/team"],
 ];
@@ -51,8 +52,15 @@ export default function Nav() {
         <ul className="hidden gap-8 text-xs uppercase tracking-[0.2em] text-slate-300 md:flex">
           {LINKS.map(([l, h]) => (
             <li key={h}>
-              <a className="transition hover:text-ice" href={h}>
-                {l}
+              <a
+                className={`transition hover:text-ice ${
+                  l === "Download"
+                    ? "rounded-sm border border-ember/50 bg-ember/10 px-3 py-1.5 text-ember hover:bg-ember/20 hover:text-ember"
+                    : ""
+                }`}
+                href={h}
+              >
+                {l === "Download" ? "⬇ Download" : l}
               </a>
             </li>
           ))}
@@ -94,11 +102,13 @@ export default function Nav() {
           {LINKS.map(([l, h]) => (
             <li key={h} className="border-b border-white/5 last:border-0">
               <a
-                className="block py-4 transition hover:text-ice"
+                className={`block py-4 transition hover:text-ice ${
+                  l === "Download" ? "font-display tracking-widest text-ember" : ""
+                }`}
                 href={h}
                 onClick={() => setOpen(false)}
               >
-                {l}
+                {l === "Download" ? "⬇ Download the Game" : l}
               </a>
             </li>
           ))}

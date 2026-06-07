@@ -2,6 +2,7 @@
 
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
+import Download from "@/components/Download";
 import About from "@/components/About";
 import Story from "@/components/Story";
 import CharactersTeaser from "@/components/CharactersTeaser";
@@ -20,6 +21,10 @@ export default function Home() {
 
       {/* 1 — Hero */}
       <Hero />
+      <SectionTransition tint="rgba(255,122,61,0.12)" />
+
+      {/* 1.5 — Play the game (download) — high so nobody misses it */}
+      <Download />
       <SectionTransition tint="rgba(232,199,155,0.10)" />
 
       {/* 2 — About */}
