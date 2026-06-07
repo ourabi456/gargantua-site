@@ -1,0 +1,349 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===========================================================================
+   GARGANTUA — cinematic design system
+   Minimalist sci-fi. Negative space is structural. Motion is subtle.
+   =========================================================================== */
+
+:root {
+  --font-display: "Orbitron", system-ui, sans-serif;
+  --font-body: "Space Grotesk", system-ui, sans-serif;
+
+  /* tone */
+  --void: #03040a;
+  --abyss: #070b18;
+  --ice: #7fd4ff;
+  --signal: #9af0ff;
+  --ember: #ff7a3d;
+  --dust: #e8c79b;
+
+  /* rhythm — one spacing scale, used everywhere */
+  --bay: clamp(7rem, 14vw, 13rem); /* vertical breathing per section */
+  --gutter: clamp(1.25rem, 5vw, 3rem);
+
+  /* motion language */
+  --ease-cine: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--void);
+  color: #cdd7ea;
+  font-family: var(--font-body);
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+::selection {
+  background: var(--ice);
+  color: var(--void);
+}
+
+:focus-visible {
+  outline: 1px solid var(--ice);
+  outline-offset: 3px;
+}
+
+/* slim cinematic scrollbar */
+::-webkit-scrollbar {
+  width: 9px;
+}
+::-webkit-scrollbar-track {
+  background: #04050c;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#1b3c5c, #0a1422);
+  border-radius: 9px;
+}
+
+/* ---- Atmospheric fixed layers ------------------------------------------- */
+.fx-grain::after {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/></filter><rect width='140' height='140' filter='url(%23n)'/></svg>");
+  animation: grainshift 0.7s steps(2) infinite;
+}
+@keyframes grainshift {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-14px, 9px);
+  }
+  100% {
+    transform: translate(7px, -11px);
+  }
+}
+
+.fx-vignette::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 30%,
+    rgba(2, 3, 9, 0.5) 76%,
+    rgba(2, 3, 9, 0.96) 100%
+  );
+}
+
+.fx-scanlines {
+  position: fixed;
+  inset: 0;
+  z-index: 56;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.02) 0,
+    rgba(255, 255, 255, 0.02) 1px,
+    transparent 2px,
+    transparent 5px
+  );
+  mix-blend-mode: overlay;
+  opacity: 0.35;
+}
+
+/* ---- Typography --------------------------------------------------------- */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.headline {
+  font-family: var(--font-display);
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  line-height: 0.92;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.title-glow {
+  text-shadow: 0 0 28px rgba(127, 212, 255, 0.4),
+    0 0 70px rgba(58, 123, 213, 0.22);
+}
+
+.kicker {
+  font-family: var(--font-display);
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  font-size: 0.66rem;
+  font-weight: 500;
+  color: var(--signal);
+}
+
+.lore-mono {
+  font-family: var(--font-display);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.62rem;
+  color: rgba(154, 240, 255, 0.7);
+}
+
+.measure {
+  max-width: 34rem;
+}
+
+/* ---- Surfaces ----------------------------------------------------------- */
+.ice-panel {
+  position: relative;
+  background: linear-gradient(
+    158deg,
+    rgba(20, 36, 60, 0.42),
+    rgba(7, 11, 24, 0.62)
+  );
+  border: 1px solid rgba(127, 212, 255, 0.12);
+  backdrop-filter: blur(14px) saturate(120%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 40px 90px -50px rgba(0, 0, 0, 0.95);
+  transition: border-color 0.5s var(--ease-soft),
+    transform 0.6s var(--ease-cine), box-shadow 0.6s var(--ease-cine);
+}
+.ice-panel:hover {
+  border-color: rgba(127, 212, 255, 0.32);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 50px 110px -50px rgba(0, 0, 0, 1), 0 0 50px -20px rgba(127, 212, 255, 0.3);
+}
+/* hairline corner accents — the "archive" motif */
+.ice-panel::before,
+.ice-panel::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: rgba(127, 212, 255, 0.4);
+  pointer-events: none;
+}
+.ice-panel::before {
+  top: -1px;
+  left: -1px;
+  border-top: 1px solid;
+  border-left: 1px solid;
+}
+.ice-panel::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 1px solid;
+  border-right: 1px solid;
+}
+
+.btn-signal {
+  font-family: var(--font-display);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #eaf6ff;
+  border: 1px solid rgba(127, 212, 255, 0.42);
+  background: linear-gradient(
+    180deg,
+    rgba(127, 212, 255, 0.1),
+    rgba(127, 212, 255, 0.01)
+  );
+  transition: all 0.45s var(--ease-cine);
+  position: relative;
+  overflow: hidden;
+}
+.btn-signal::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.16) 50%,
+    transparent 70%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.7s var(--ease-cine);
+}
+.btn-signal:hover {
+  background: rgba(127, 212, 255, 0.18);
+  box-shadow: 0 0 36px rgba(127, 212, 255, 0.32);
+  transform: translateY(-2px);
+}
+.btn-signal:hover::after {
+  transform: translateX(120%);
+}
+
+/* animated stat bar — character dossiers */
+.stat-track {
+  height: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+.stat-fill {
+  height: 100%;
+  transform-origin: left;
+  transform: scaleX(var(--v, 0));
+  transition: transform 1.4s var(--ease-cine);
+}
+
+.edge-fade-b {
+  -webkit-mask-image: linear-gradient(to bottom, #000 68%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 68%, transparent 100%);
+}
+
+.parallax-pin {
+  will-change: transform;
+}
+
+/* ---- Glitch (sparingly) ------------------------------------------------- */
+.glitch {
+  position: relative;
+}
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+}
+.glitch::before {
+  left: 2px;
+  text-shadow: -2px 0 var(--ember);
+  animation: glitchTop 3.6s infinite linear alternate-reverse;
+}
+.glitch::after {
+  left: -2px;
+  text-shadow: -2px 0 var(--ice);
+  animation: glitchBot 2.9s infinite linear alternate-reverse;
+}
+@keyframes glitchTop {
+  0%, 94%, 100% {
+    clip-path: inset(0 0 100% 0);
+  }
+  95% {
+    clip-path: inset(0 0 34% 0);
+  }
+  98% {
+    clip-path: inset(0 0 66% 0);
+  }
+}
+@keyframes glitchBot {
+  0%, 92%, 100% {
+    clip-path: inset(100% 0 0 0);
+  }
+  93% {
+    clip-path: inset(56% 0 0 0);
+  }
+  97% {
+    clip-path: inset(20% 0 0 0);
+  }
+}
+
+/* slow ambient drift used by the atmosphere field */
+@keyframes drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1.1);
+  }
+  50% {
+    transform: translate3d(-3%, -2%, 0) scale(1.16);
+  }
+  100% {
+    transform: translate3d(2%, 1%, 0) scale(1.1);
+  }
+}
+@keyframes breathe {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
