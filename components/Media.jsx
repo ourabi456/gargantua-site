@@ -136,7 +136,7 @@ export default function Media() {
             { key: "instagram", label: "Instagram", glyph: "◎", note: "@gargantua2189", accent: "text-ice border-ice/40" },
             { key: "instagramCrew", label: "Astro Crew", glyph: "◍", note: "@astro.crew.2026", accent: "text-ice border-ice/40" },
             { key: "tiktok", label: "TikTok", glyph: "♪", note: "Clips", accent: "text-signal border-signal/40" },
-            { key: "website", label: "Website", glyph: "⬡", note: "Download & press", accent: "text-ice border-ice/40" },
+            { key: "website", label: "Download Game", glyph: "⬇", note: "Windows · free · v1.0", accent: "text-ember border-ember/40" },
             { key: "feedback", label: "Feedback", glyph: "✎", note: "Tell us what you think", accent: "text-ember border-ember/40" },
           ].map((l, i) => {
             const url = SOCIALS[l.key] || "#";
