@@ -13,7 +13,7 @@ export default function Download() {
     SOCIALS.website && SOCIALS.website !== "#" ? SOCIALS.website : null;
 
   const steps = [
-    ["01", "Download", "Grab the ZIP (v1.0.1) — one click above. Windows 64-bit."],
+    ["01", "Download", "Grab the ZIP (v1.0.2) — one click above. Windows 64-bit."],
     ["02", "Unzip", "Extract the whole GARGANTUA folder anywhere you like."],
     ["03", "Run", "Open desert_runner.exe. If SmartScreen warns → More info → Run anyway."],
   ];
@@ -58,7 +58,7 @@ export default function Download() {
               <span className="text-xl leading-none">⬇</span> Download for Windows
             </a>
             <p className="mt-4 text-xs tracking-[0.25em] text-slate-400">
-              WINDOWS 64-BIT · ~334 MB · v1.0.1 · FREE
+              WINDOWS 64-BIT · ~336 MB · v1.0.2 · FREE
             </p>
 
             {/* install steps */}
